@@ -1,0 +1,75 @@
+version: '3'
+services:
+  ## Elastic APM Stack
+  apm:
+    command: --strict.perms=false
+    image: docker.elastic.co/apm/apm-server:7.8.1
+    ports:
+      - 8200:8200
+    links:
+      - elasticsearch
+      - kibana
+    volumes:
+      - "./elastic-apm/apm-server.yml:/usr/share/apm-server/apm-server.yml"
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.1
+    environment:
+      - discovery.type=single-node
+      - cluster.name=apm-java
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    ports:
+      - 9200
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.8.1
+    links:
+      - elasticsearch
+    ports:
+      - 5601:5601
+
+  ## Microservices Demo
+  mongodb:
+    image: mongo:4.4.0-bionic
+    ports:
+      - 27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: superman
+      MONGO_INITDB_ROOT_PASSWORD: iamsuperman
+      MONGO_INITDB_DATABASE: userservices
+    volumes:
+      - ./microservices/database-mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  redis:
+    image: "redis:alpine"
+  backend-cloudgateway:
+    image: heronimus/apm-app-cloudgateway:0.0.1-elasticapm
+    ports:
+      - 8081:8080
+    links:
+      - apm
+    environment:
+      - APM_HOST=apm:8200
+  backend-userservices:
+    image: heronimus/apm-app-userservices:0.0.1-elasticapm
+    ports:
+      - 8080
+    links:
+      - apm
+    environment:
+      - APM_HOST=apm:8200
+  backend-randomcat:
+    image: heronimus/apm-app-randomcat:0.0.1-elasticapm
+    ports:
+      - 5000
+    links:
+      - apm
+    environment:
+      - APM_HOST=apm:8200
+      - APM_ENABLED=True
+  frontend-homeui:
+    image: heronimus/apm-app-homeui:0.0.1-elasticapm
+    ports:
+      - 8080:8080
+    links:
+      - apm
+    environment:
+      - APM_HOST=apm:8200

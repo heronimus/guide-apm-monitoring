@@ -42,16 +42,16 @@ Please pull below docker images first to save time before running this guide. Yo
 
 - Frontend Home-UI (NodeJS-Express)
 
-      WIP (will be updated)
+      docker pull heronimus/apm-app-homeui:0.0.1-elasticapm
 
 - Backend Cloud Gateway (Spring Cloud Gateway)
 
-      WIP (will be updated)
+      docker pull heronimus/apm-app-cloudgateway:0.0.1-elasticapm
 
 - Backend User Services (Spring Boot: Reactive MongoDB)
 
-      WIP (will be updated)
+      docker pull heronimus/apm-app-userservices:0.0.1-elasticapm
 
-- Backend Random Cat Kocheng (Python Flask)
+- Backend Random Cat (Kocheng) (Python Flask)
 
-      WIP (will be updated)
+      docker pull heronimus/apm-app-randomcat:0.0.1-elasticapm

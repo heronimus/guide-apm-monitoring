@@ -1,3 +1,4 @@
 requests
 flask
+redis
 elastic-apm[flask]
