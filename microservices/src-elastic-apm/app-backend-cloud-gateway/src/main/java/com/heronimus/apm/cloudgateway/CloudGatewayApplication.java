@@ -20,7 +20,7 @@ public class CloudGatewayApplication {
     class ServerRestEndpoint {
 
         @GetMapping(value = "/", produces = "application/json")
-        public String test() throws InterruptedException {
+        public String index() throws InterruptedException {
             return "{\"service_name\": \"api-gateway\", \"description\": \"Backend API Server using Spring Cloud Gateway\"}";
         }
 
