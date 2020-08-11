@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= 'Users'
+  p List of user data from userservices:
+
+  ol(type='1')
+    each user in users
+      li
+        a(href='/users/' + user.id) #{user.name} + ' (' + #{user.email} + ')'
