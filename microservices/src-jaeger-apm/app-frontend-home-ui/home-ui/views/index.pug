@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  h4= index
+  ol
+    li
+      a(href='/users') /users
+    li
+      a(href='/random-cat') /random-cat

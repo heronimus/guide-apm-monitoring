@@ -1,0 +1,6 @@
+requests
+flask
+redis
+jaeger-client
+Flask-Opentracing
+opentracing
