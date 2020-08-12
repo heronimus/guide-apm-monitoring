@@ -27,7 +27,7 @@ services:
   backend-cloudgateway:
     image: heronimus/apm-app-cloudgateway:0.0.1-jaegerapm
     ports:
-      - 8082:8080
+      - 8081:8080
     links:
       - jaeger-allinone
     environment:
@@ -59,4 +59,4 @@ services:
       - jaeger-allinone
     environment:
       - JAEGER_AGENT_HOST=jaeger-allinone
-      - JAEGER_AGENT_PORT=6831
+      - JAEGER_AGENT_PORT=6832
