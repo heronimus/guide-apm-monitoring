@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= 'Users Detail'
+  p Detail of user data from userservices:
+
+  img(src=imageurl, alt='avatar the legends of cat')
+
+  h4= user.name
+  p ID: #{user.id}
+  p Email: #{user.email}

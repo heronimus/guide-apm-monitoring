@@ -1,0 +1,50 @@
+version: '3'
+services:
+  ## Jaeger All-In-One
+  jaeger-allinone:
+    image: jaegertracing/all-in-one:1.18.1
+    ports:
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 16686:16686
+      - 14268:14268
+      - 9411:9411
+  # Microservices Demo
+  mongodb:
+    image: mongo:4.4.0-bionic
+    ports:
+      - 27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: superman
+      MONGO_INITDB_ROOT_PASSWORD: iamsuperman
+      MONGO_INITDB_DATABASE: userservices
+    volumes:
+      - ./microservices/database-mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  redis:
+    image: "redis:alpine"
+  backend-cloudgateway:
+    image: heronimus/apm-app-cloudgateway:0.0.1-jaegerapm
+    ports:
+      - 8082:8080
+    links:
+      - jaeger-allinone
+  backend-userservices:
+    image: heronimus/apm-app-userservices:0.0.1-jaegerapm
+    ports:
+      - 8080
+    links:
+      - jaeger-allinone
+  backend-randomcat:
+    image: heronimus/apm-app-randomcat:0.0.1-jaegerapm
+    ports:
+      - 5000
+    links:
+      - jaeger-allinone
+  frontend-homeui:
+    image: heronimus/apm-app-homeui:0.0.1-jaegerapm
+    ports:
+      - 8080:8080
+    links:
+      - jaeger-allinone

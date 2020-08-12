@@ -43,15 +43,19 @@ Please pull below docker images first to save time before running this guide. Yo
 - Frontend Home-UI (NodeJS-Express)
 
       docker pull heronimus/apm-app-homeui:0.0.1-elasticapm
+      docker pull heronimus/apm-app-homeui:0.0.1-jaegerapm
 
 - Backend Cloud Gateway (Spring Cloud Gateway)
 
       docker pull heronimus/apm-app-cloudgateway:0.0.1-elasticapm
+      docker pull heronimus/apm-app-cloudgateway:0.0.1-jaegerapm
 
 - Backend User Services (Spring Boot: Reactive MongoDB)
 
       docker pull heronimus/apm-app-userservices:0.0.1-elasticapm
+      docker pull heronimus/apm-app-userservices:0.0.1-jaegerapm
 
 - Backend Random Cat (Kocheng) (Python Flask)
 
       docker pull heronimus/apm-app-randomcat:0.0.1-elasticapm
+      docker pull heronimus/apm-app-randomcat:0.0.1-jaegerapm
