@@ -20,8 +20,8 @@ def init_jaeger_tracer(service_name='random-cat'):
                     'param': 1,
                 },
                 'local_agent': {
-                    'reporting_host': 'jaeger-allinone',
-                    'reporting_port': '6831',
+                    'reporting_host': os.getenv('JAEGER_AGENT_HOST', 'localhost'),
+                    'reporting_port': os.getenv('JAEGER_AGENT_PORT', '6831'),
                 },
                 'logging': True,
             },

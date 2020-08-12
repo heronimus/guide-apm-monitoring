@@ -6,13 +6,16 @@
  var initTracer = require('jaeger-client').initTracer;
 
  // See schema https://github.com/jaegertracing/jaeger-client-node/blob/master/src/configuration.js#L37
+ // Notes: Jaeger Node.js Client Library only support report jaeger.thrift using Binary protocol over UDP/
+ //        TCP, usually port 6382 (different with compact protocol at 6381)
+
  var config = {
    serviceName: 'home-ui',
    disable: false,
    reporter: {
       properties: {
-        agentHost: 'jaeger-allinone',
-        agentPort: 6831,
+        agentHost: normalizeAPMHost(process.env.JAEGER_AGENT_HOST || 'localhost'),
+        agentPort: normalizePort(process.env.JAEGER_AGENT_PORT || '6382'),
       },
     },
  };
@@ -53,7 +56,7 @@ server.on('listening', onListening);
  */
 
 function normalizeAPMHost(val) {
-  return 'http://'+val;
+  return val;
 }
 
 /**
