@@ -30,21 +30,33 @@ services:
       - 8082:8080
     links:
       - jaeger-allinone
+    environment:
+      - OPENTRACING_JAEGER_UDP_SENDER_HOST=jaeger-allinone
+      - OPENTRACING_JAEGER_UDP_SENDER_PORT=6831
   backend-userservices:
     image: heronimus/apm-app-userservices:0.0.1-jaegerapm
     ports:
       - 8080
     links:
       - jaeger-allinone
+    environment:
+      - OPENTRACING_JAEGER_UDP_SENDER_HOST=jaeger-allinone
+      - OPENTRACING_JAEGER_UDP_SENDER_PORT=6831
   backend-randomcat:
     image: heronimus/apm-app-randomcat:0.0.1-jaegerapm
     ports:
       - 5000
     links:
       - jaeger-allinone
+    environment:
+      - JAEGER_AGENT_HOST=jaeger-allinone
+      - JAEGER_AGENT_PORT=6831
   frontend-homeui:
     image: heronimus/apm-app-homeui:0.0.1-jaegerapm
     ports:
       - 8080:8080
     links:
       - jaeger-allinone
+    environment:
+      - JAEGER_AGENT_HOST=jaeger-allinone
+      - JAEGER_AGENT_PORT=6831
