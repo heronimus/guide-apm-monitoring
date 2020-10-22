@@ -6,7 +6,7 @@
 *.log
 
 # Package Files #
-*.jar
+maven-wrapper.jar
 *.war
 *.nar
 *.ear
