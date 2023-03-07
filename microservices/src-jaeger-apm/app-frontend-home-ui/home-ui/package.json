@@ -13,6 +13,6 @@
     "http-errors": "~1.6.3",
     "jaeger-client": "^3.18.0",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.4"
   }
 }
